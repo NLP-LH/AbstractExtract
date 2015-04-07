@@ -4,11 +4,17 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.shirdrn.document.processor.Sorting;
+
+import crf.datawash.CrfTestedDataBack;
+
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
+import tools.all.ExcelRead;
+import tools.all.ExcelWrite;
 import tools.all.FileInputAndOutput;
 
 public class test12 {
@@ -20,15 +26,50 @@ public class test12 {
 	 */
 	public static void main(String[] args) throws BiffException, IOException {
 		
-		//ddk();
-	   Workbook book = Workbook.getWorkbook(new File("D:/file/DataToExtract/FullData.xls"));
-		  Sheet sheet = book.getSheet(0);
-		   //System.out.println(sheet.);
-		  for(int i=1;i<1108;i++){
-		  Cell cell1 = sheet.getCell(8, i);
-		  System.out.println(cell1.getContents()); 
-		  }
-		  book.close();
+		
+		CrfTestedDataBack aa=new CrfTestedDataBack();
+		System.out.println("1");
+		aa.CrfTDB("D:\\file\\4", "D:\\file\\5");
+		System.out.println("2");
+	}
+	
+	public static void ffk() {
+		ArrayList<String> AbstractString = new ArrayList<String>();
+		ArrayList<String> Abs = new ArrayList<String>();
+		String DataToExtractFilePath="D:/file/DataToExtract/FullData.xls";
+		//读取文档中的摘要
+		ExcelRead ER=new ExcelRead();	
+		AbstractString=ER.ExcelReadingGetColumn(DataToExtractFilePath, 1,1107, 9);
+		for (int i=0; i < AbstractString.size(); i++) {
+			
+			Abs.add(cfk(AbstractString.get(i)));
+			
+		}	
+		
+		ExcelWrite EW=new ExcelWrite();
+		EW.ExcelWritingOfColumn("D:/file/DataToExtract/FullData.xls", 1,1107, 8,Abs);
+		
+		
+		
+	}
+	public static String  cfk(String k) {
+		String s="";
+		int type=0;
+		int weizhi=0;
+		while(k.length()>2){
+			if(k.charAt(2)=='#'){
+				type=Integer.parseInt(k.substring(4, 5));
+				weizhi=k.indexOf(")"+type+type+"####");
+			}
+			
+			s=s+k.substring(7,weizhi);
+			//System.out.println(s);
+			k=k.substring(weizhi+7);
+			//System.out.println(k);
+		}
+		
+		return s;
+		
 	}
 
 	public static void ddk() {

@@ -1,11 +1,14 @@
 package main.abstractextract;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import crf.datawash.CrfDataWash;
 import crf.datawash.CrfTestedDataBack;
 import crf.term.recognition.CrfCmdControl;
+import svm.ClassificationTree;
 import svm.datawash.AllTermsReplaceByShuYu;
+import svm.datawash.SVMedAbstractBack;
 import tools.all.ExcelRead;
 import tools.all.ExcelWrite;
 import tools.all.FileInputAndOutput;
@@ -13,20 +16,20 @@ import tools.all.FileInputAndOutput;
 public class AbstractExtract {
 
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		ArrayList<String> AbstractString = new ArrayList<String>();
-		String DataToExtractFilePath="D:/file/DataToExtract/FullData.xls";
-		//读取文档中的摘要
+		String DataToExtractFilePath="D:/file/DataToExtract/FullData.xls";			
 		ExcelRead ER=new ExcelRead();	
+		ExcelWrite EW=new ExcelWrite();
+		//读取文档中的摘要	
 		AbstractString=ER.ExcelReadingGetColumn(DataToExtractFilePath, 1,1107, 8);
 		for (int i=0; i < AbstractString.size(); i++) {
 			System.out.println(i+"  "+AbstractString.get(i));
-		}	
-		
+		}			
 	    //将读取的摘要转换成CRF要求的格式，并写入CRF文件夹的TXT文件中
 		CrfDataWash CDW=new CrfDataWash();
 		FileInputAndOutput.writetxtFile(CDW.CrfDWOfList(AbstractString),"D:/file/Crf/CrfDataToTest.txt");//写入文件中
-
+		
     	//用CRF进行训练
 		CrfCmdControl CCC=new CrfCmdControl();
 		CCC.CrfControl("crf_test -m CrfModel CrfDataToTest.txt >> result");
@@ -40,13 +43,25 @@ public class AbstractExtract {
 		CrfTestedDataBack CTDB=new CrfTestedDataBack();
 		CTDB.CrfTDB("D:/file/Crf/result","D:/file/Crf/resultAfterCTDB");
 		//将转换完的文本放入EXCEL表格中，
-		ExcelWrite EW=new ExcelWrite();
-		EW.ExcelWritingOfColumn(DataToExtractFilePath, 1,1108, 10, FileInputAndOutput.readTxtFile2("D:/file/Crf/resultAfterCTDB"));
+		EW.ExcelWritingOfColumn(DataToExtractFilePath, 1,1107, 10, FileInputAndOutput.readTxtFile2("D:/file/Crf/resultAfterCTDB"));
 		//将标出来的术语转换成术语两字
 		AllTermsReplaceByShuYu ATR=new AllTermsReplaceByShuYu();
-		EW.ExcelWritingOfColumn(DataToExtractFilePath, 1,1108, 11, ATR.ATRBSY(FileInputAndOutput.readTxtFile2("D:/file/Crf/resultAfterCTDB")));
+		EW.ExcelWritingOfColumn(DataToExtractFilePath, 1,1107, 11, ATR.ATRBSY(FileInputAndOutput.readTxtFile2("D:/file/Crf/resultAfterCTDB")));
+				
 		//将转换完的文本进行分类，分类标记好之后再存入文本
-	
+		ArrayList<String> AbstractString2 = new ArrayList<String>();
+		ArrayList<String> AbstractString3 = new ArrayList<String>();
+		AbstractString2=ER.ExcelReadingGetColumn(DataToExtractFilePath, 1,1107, 11);
+		ClassificationTree CT=new ClassificationTree();
+		for(int i =0;i<AbstractString2.size();i++)
+		{
+			AbstractString3.add(CT.Classification(AbstractString2.get(i)));
+			
+		}
+		EW.ExcelWritingOfColumn(DataToExtractFilePath, 1,1107, 12, AbstractString3);
+		//将分类结合的结果中术语再替换成原有的字符串。
+		SVMedAbstractBack SVMAA=new SVMedAbstractBack();
+		EW.ExcelWritingOfColumn(DataToExtractFilePath, 1,1107, 13,SVMAA.SVMAB(ER.ExcelReadingGetColumn(DataToExtractFilePath, 1,1107, 8), ER.ExcelReadingGetColumn(DataToExtractFilePath, 1,1107, 12)));
 		//对类型进行提取
 		
 		//对组件进行提取
