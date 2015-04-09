@@ -10,22 +10,24 @@ public class PutInTxts {
 		String readFilePath = "D:\\file\\leixingzujian.txt";// 读取的文件路径
 	   //String writeFilePath = "D:\\file\\Result.txt";// 写入的文件路径
 		datainputList = FileInputAndOutput.readTxtFile2(readFilePath);
-		for(int i=0;i<datainputList.size();i++){
+		int n=1;
+		for(String s:datainputList){		
 			ArrayList<String> datatowriteList = new ArrayList<String>();
-			datatowriteList.add(datainputList.get(i));
-			System.out.println(datainputList.get(i));
-			int n=i+1;
+			datatowriteList.add(s);
+			System.out.println(s);		
 			String address="D:\\file\\leixingzujian\\leixingzujian"+n+".txt";
+			n+=1;
 			FileInputAndOutput.writetxtFile2(datatowriteList,address);			
 		}		
 	}
 	public void PIT(String name,ArrayList<String> datainputList) {
-		for(int i=0;i<datainputList.size();i++){
+		int n=1;	
+		for(String s:datainputList){	
 			ArrayList<String> datatowriteList = new ArrayList<String>();
-			datatowriteList.add(datainputList.get(i));
-			System.out.println(datainputList.get(i));
-			int n=i+1;
+			datatowriteList.add(s);
+			System.out.println(s);
 			String address="D:\\file\\SVMFile\\训练数据\\"+name+"\\"+name+n+".txt";
+			n+=1;
 			FileInputAndOutput.writetxtFile2(datatowriteList,address);			
 		}	
 		

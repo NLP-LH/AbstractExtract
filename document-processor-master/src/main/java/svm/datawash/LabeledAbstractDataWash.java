@@ -19,9 +19,7 @@ public class LabeledAbstractDataWash {
 		String writeFilePath2 = "D:\\file\\zujian.txt";// 写入的文件路径
 		String writeFilePath3 = "D:\\file\\gongxiao.txt";// 写入的文件路径
 		datainputList = FileInputAndOutput.readTxtFile(readFilePath);
-		for(int i=0;i<datainputList.size();i++){
-			System.out.println(i);	
-			String OneAbstract=datainputList.get(i);
+		for (String OneAbstract:datainputList){
 			boolean reachEnd=false;
 			while(reachEnd==false){
 				String leixing= OneAbstract.substring(4,5);

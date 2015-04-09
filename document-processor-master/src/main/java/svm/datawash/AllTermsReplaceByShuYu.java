@@ -11,32 +11,23 @@ public class AllTermsReplaceByShuYu {
 		String readFilePath = "D:\\file\\1.txt";// 读取的文件路径
 		String writeFilePath = "D:\\file\\Result.txt";// 写入的文件路径
 		datainputList = FileInputAndOutput.readTxtFile(readFilePath);
-		for (int i = 0; i < datainputList.size(); i++) {//
-			ArrayList<String> datatowriteList = new ArrayList<String>();
-			String s=datainputList.get(i);//把一句摘要放到字符串S中
-			System.out.println(datainputList.get(i));
-		
-		
-				String ac=s.replaceAll("####\\(.*?\\)####", "术语");
-				
-				datatowriteList.add(ac);
-			
-				
+		for(String s: datainputList){
+			ArrayList<String> datatowriteList = new ArrayList<String>();		
+				String ac=s.replaceAll("####\\(.*?\\)####", "术语");				
+				datatowriteList.add(ac);				
 			FileInputAndOutput.writetxtFile(datatowriteList,writeFilePath);//写入文件中
 		}
 	}
 	
 	public String ATRBSY(String s){
-		String ac=s.replaceAll("####\\(.*?\\)####", "术语");
-		
+		String ac=s.replaceAll("####\\(.*?\\)####", "术语");		
 		return ac;
 	}
 	public ArrayList<String> ATRBSY(ArrayList<String> abs){
 		ArrayList<String> res=new ArrayList<String>();
-		for(int i=0;i<abs.size();i++){
-			res.add(abs.get(i).replaceAll("####\\(.*?\\)####", "术语"));
-			
-		}
+		for(String s:abs){
+			res.add(s.replaceAll("####\\(.*?\\)####", "术语"));			
+		}	
 		
 		return res;
 	}

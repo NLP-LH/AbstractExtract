@@ -12,8 +12,8 @@ public class Sorting {
 		ArrayList<String> datainputList = new ArrayList<String>();
 		ArrayList<String> datatowriteList = new ArrayList<String>();
 		datainputList = FileInputAndOutput.readTxtFile(readFilePath);
-		for (int i = 0; i < datainputList.size(); i++) {//
-			String[] aka= datainputList.get(i).split(" ");
+		for (String ss :datainputList) {
+			String[] aka= ss.split(" ");
 			TreeMap<Integer,Double> map=new TreeMap<Integer,Double>();
 			String shouxuhao =aka[0];
 			String ju=shouxuhao;

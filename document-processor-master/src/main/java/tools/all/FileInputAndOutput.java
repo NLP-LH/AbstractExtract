@@ -63,8 +63,8 @@ public class FileInputAndOutput {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(new File(
 					path), true));
-			for (int i = 0; i < List.size(); i++) {
-				writer.write(List.get(i));
+			for (String s:List) {
+				writer.write(s);
 				writer.newLine();// 换行
 			}
 			writer.close();
@@ -78,8 +78,8 @@ public class FileInputAndOutput {
 		try {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
 					new FileOutputStream(path), Charset.forName("GBK")));
-			for (int i = 0; i < List.size(); i++) {
-				bw.write(List.get(i));
+			for (String s:List) {
+				bw.write(s);
 				bw.newLine();// 换行
 			}
 			bw.close();

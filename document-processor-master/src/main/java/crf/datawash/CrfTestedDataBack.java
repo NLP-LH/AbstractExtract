@@ -11,10 +11,7 @@ public class CrfTestedDataBack {
 		ArrayList<String> datainputList = new ArrayList<String>();
 		ArrayList<String> datatowriteList = new ArrayList<String>();
 		datainputList = FileInputAndOutput.readTxtFile2(readFilePath);
-		for (int i = 0; i < datainputList.size(); i++) {
-			//System.out.println(i);
-		//	System.out.println(datainputList.get(i));
-			String s = datainputList.get(i);
+		for(String s :datainputList){
 			if (s.length() <2) {//datatowriteList.add("");
 			datatowriteList.add(sentence);
 			System.out.println(sentence);

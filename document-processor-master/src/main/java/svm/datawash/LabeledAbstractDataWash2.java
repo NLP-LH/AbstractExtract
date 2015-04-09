@@ -18,9 +18,8 @@ public class LabeledAbstractDataWash2 {
 		String writeFilePath2 = "D:\\file\\leixingzujian.txt";// 写入的文件路径
 		String writeFilePath3 = "D:\\file\\gongxiao.txt";// 写入的文件路径
 		datainputList = FileInputAndOutput.readTxtFile(readFilePath);
-		for(int i=0;i<datainputList.size();i++){
-			System.out.println(i);	
-			String OneAbstract=datainputList.get(i);
+
+		for(String OneAbstract:datainputList){
 			String leixinghezujian="";
 			String gongxiao="";
 			boolean reachEnd=false;
@@ -57,10 +56,8 @@ public class LabeledAbstractDataWash2 {
 	
 		ArrayList<String> datatowriteList2 = new ArrayList<String>();
 		ArrayList<String> datatowriteList3 = new ArrayList<String>();		
-		for(int i=0;i<AbstractString.size();i++){
-			
-			System.out.println(i+"  "+AbstractString.get(i));	
-			String OneAbstract=AbstractString.get(i);
+
+		for(String OneAbstract:AbstractString){	
 			String leixinghezujian="";
 			String gongxiao="";
 			boolean reachEnd=false;

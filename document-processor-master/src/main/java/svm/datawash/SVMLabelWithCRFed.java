@@ -20,13 +20,11 @@ public class SVMLabelWithCRFed {
 				EndRow, CRFColumn);
 
 		 for (int i=0; i < AbstractCRFString.size(); i++) {
-		//for (int i = 0; i < 15; i++) {
 			String s = AbstractSVMString.get(i);
 			System.out.println("s"+"  "+s);
 			String type = "";
 			String EndStr = "";
-			String SubStr = "";
-		
+			String SubStr = "";	
 			while (s.length() > 2) {
 				int juhao = 0;
 				int douhao = 0;
@@ -41,23 +39,18 @@ public class SVMLabelWithCRFed {
 					for (int u = 0; u < SubStr.length(); u++) {
 						if (SubStr.charAt(u) == '。') {
 							juhao += 1;
-
 						}
 						if (SubStr.charAt(u) == '，'||SubStr.charAt(u) == ',') {
 							douhao += 1;
-
 						}
 						if (SubStr.charAt(u) == '；') {
 							fenhao += 1;
-
 						}
 					}
 					AbstractClaString.add(i + "," + type + "," + douhao + ","
 							+ juhao+ ","+fenhao);
 					System.out.println(i+","+type+","+juhao + " " + douhao+","+fenhao);
-
 				} else {
-
 					System.out.println("  出错了");
 				}
 			}
@@ -94,8 +87,7 @@ public class SVMLabelWithCRFed {
 			fenhao = Integer.parseInt(s);
 			System.out.println("---------------------------");
 			System.out.println("  num "+num + "," + type + "," + douhao + "," + juhao+ "," + fenhao);
-			
-		
+				
 			if (num == nm) {
 				// 处理
 				int ju = 0;
@@ -103,9 +95,7 @@ public class SVMLabelWithCRFed {
 				int fen=0;
 				for (int p = 0; p < Abs.length(); p++) {
 					if (Abs.charAt(p) == '，'||Abs.charAt(p) == ',') {
-
 						dou = dou + 1;
-
 						if(dou==douhao&&ju==juhao&&fen==fenhao){
 							NewStr=NewStr+"####"+type+type+"("+Abs.substring(0, p+1)+")"+type+type+"####";
 							Abs=Abs.substring(p+1);
@@ -124,10 +114,8 @@ public class SVMLabelWithCRFed {
 							System.out.println(Abs);
 							break;
 						}
-
 					}
 					if (Abs.charAt(p) == '；') {
-
 						fen = fen + 1;
 						if(dou==douhao&&ju==juhao&&fen==fenhao){
 							NewStr=NewStr+"####"+type+type+"("+Abs.substring(0, p+1)+")"+type+type+"####";
@@ -136,13 +124,8 @@ public class SVMLabelWithCRFed {
 							System.out.println(Abs);
 							break;
 						}
-
 					}
 				}
-				
-				
-				//NewStr = NewStr + Abs;
-
 			} else {
 				AbstractNewString.add(NewStr);
 				System.out.println("haha "+NewStr);
@@ -155,9 +138,7 @@ public class SVMLabelWithCRFed {
 				int fen=0;
 				for (int p = 0; p < Abs.length(); p++) {
 					if (Abs.charAt(p) == '，'||Abs.charAt(p) == ',') {
-
 						dou = dou + 1;
-
 						if(dou==douhao&&ju==juhao&&fen==fenhao){
 							NewStr=NewStr+"####"+type+type+"("+Abs.substring(0, p+1)+")"+type+type+"####";
 							Abs=Abs.substring(p+1);
@@ -167,7 +148,6 @@ public class SVMLabelWithCRFed {
 						}
 					}
 					if (Abs.charAt(p) == '。') {
-
 						ju = ju + 1;
 						if(dou==douhao&&ju==juhao&&fen==fenhao){
 							NewStr=NewStr+"####"+type+type+"("+Abs.substring(0, p+1)+")"+type+type+"####";
@@ -176,12 +156,9 @@ public class SVMLabelWithCRFed {
 							System.out.println(Abs);
 							break;
 						}
-
 					}
 					if (Abs.charAt(p) == '；') {
-
 						fen = fen + 1;
-
 						if(dou==douhao&&ju==juhao&&fen==fenhao){
 							NewStr=NewStr+"####"+type+type+"("+Abs.substring(0, p+1)+")"+type+type+"####";
 							Abs=Abs.substring(p+1);
@@ -190,29 +167,14 @@ public class SVMLabelWithCRFed {
 							break;
 						}
 					}
-
 				}
-
-				
-
 			}
-
 		}
 		AbstractNewString.add(NewStr);
 		ExcelWrite EW=new ExcelWrite();
-		EW.ExcelWritingOfColumn(DataToExtractFilePath, StartRow-1,EndRow, ResultRow, AbstractNewString);
-		
+		EW.ExcelWritingOfColumn(DataToExtractFilePath, StartRow-1,EndRow, ResultRow, AbstractNewString);		
 		for (int i = 1; i < AbstractNewString.size(); i++) {
-			System.out.println(i+"  "+AbstractNewString.get(i));
-			
-			
-		}
-		
-		
-		
-		
+			System.out.println(i+"  "+AbstractNewString.get(i));						
+		}		
 	}
-
-
-
 }

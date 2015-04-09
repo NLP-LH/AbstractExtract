@@ -10,10 +10,8 @@ public class CrfDataWash {
 		ArrayList<String> datainputList = new ArrayList<String>();		
 	
 		datainputList = FileInputAndOutput.readTxtFile(readFilePath);
-		for (int i = 0; i < datainputList.size(); i++) {
+		for(String s:datainputList){		
 			ArrayList<String> datatowriteList = new ArrayList<String>();
-			String s=datainputList.get(i);//把一句摘要放到字符串S中
-			System.out.println(datainputList.get(i));
 			for(int u=0;u<s.length();u++){//对S进行遍历
 				if(s.substring(u, u+1).equals("#")){//判断遍历到的字符是否为#			
 					if(s.substring(u+1, u+5).equals("###(")){//是#的话再判断后面是不是###(
@@ -84,10 +82,7 @@ public class CrfDataWash {
 	public ArrayList<String> CrfDWOfList(ArrayList<String> datainputList) {
 		// 将用####()####标注好的专利摘要语料变成CRF要求的格式。如电 B 冰 I 箱 I
 		ArrayList<String> datatowriteList = new ArrayList<String>();
-		for (int i = 0; i < datainputList.size(); i++) {
-		
-			String s=datainputList.get(i);//把一句摘要放到字符串S中
-			System.out.println(datainputList.get(i));
+		for(String s:datainputList){	
 			for(int u=0;u<s.length();u++){//对S进行遍历
 				if(s.substring(u, u+1).equals("#")){//判断遍历到的字符是否为#			
 					if(s.substring(u+1, u+5).equals("###(")){//是#的话再判断后面是不是###(

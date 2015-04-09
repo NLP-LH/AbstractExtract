@@ -10,24 +10,24 @@ public class CrfResultTest {
 		ArrayList<String> dataRightList = new ArrayList<String>();
 		String readFilePath = "D:\\file\\result.txt";// 读取的文件路径
 		datainputList = FileInputAndOutput.readTxtFile(readFilePath);
-		for (int i = 0; i < datainputList.size(); i++) {//
-			if(datainputList.get(i).length()<3){
+		for(String s :datainputList){
+			if(s.length()<3){
 				dataRightList.add(" ");
 				datatotestList.add(" ");
 				
 			}else{
-			dataRightList.add(datainputList.get(i).substring(2, 3));
-			datatotestList.add(datainputList.get(i).substring(4, 5));
+			dataRightList.add(s.substring(2, 3));
+			datatotestList.add(s.substring(4, 5));
 			}
 		}
 			int RecTermNumber=0;
 			int TermNumber=0;
 			int RightTermNumber=0;
-		for (int i = 0; i < dataRightList.size(); i++) {//
-		  if(dataRightList.get(i).equals("B")){			  
+		for (String s : dataRightList){
+		  if(s.equals("B")){			  
 			  TermNumber+=1;
 		  }
-		  if(datatotestList.get(i).equals("B")){
+		  if(s.equals("B")){
 			  RecTermNumber+=1;
 		  }			   		 
 		}

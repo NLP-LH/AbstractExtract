@@ -20,7 +20,6 @@ public class ClassificationTree {
 	public String Classification(String s) throws IOException {
 		//1 功效
 		//2 组件
-		
 
 		String result = "";
 		StringBuilder sb = new StringBuilder(s);
@@ -29,7 +28,6 @@ public class ClassificationTree {
 		if (cas == -1) {
 			// 只有最后一个句号
 			int sas = aa.indexOf("明发本", 1);
-
 			if (sas == -1) {
 				// 没找到本发明几个字
 				// 按照符号一个一个SVM分类
@@ -52,18 +50,13 @@ public class ClassificationTree {
 									+ 1));
 							// SVM分类
 							break;
-
 						}
-
 					}
 					if(SVMDataWash(s.substring(s.length() - sas - p+ 1)).equals("1.0")){
-						result="####11("+s.substring(0, s.length() - sas- p + 1)+")11####"+"####22("+s.substring(s.length() - sas - p+ 1)+")22####";
-							
-					}else{
-						
+						result="####11("+s.substring(0, s.length() - sas- p + 1)+")11####"+"####22("+s.substring(s.length() - sas - p+ 1)+")22####";						
+					}else{						
 						result="-1";
 					}
-			
 					System.out.println(result);
 					//完成
 				} else {
@@ -73,7 +66,6 @@ public class ClassificationTree {
 				}
 
 			}
-
 		} else {
 			// 有不止一个句号
 			int sas = aa.indexOf("明发本", 1);

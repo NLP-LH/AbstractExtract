@@ -25,12 +25,21 @@ public class test12 {
 	 * @throws BiffException 
 	 */
 	public static void main(String[] args) throws BiffException, IOException {
+		ArrayList<String> AbstractString = new ArrayList<String>();
+		String DataToExtractFilePath="D:/file/DataToExtract/FullData.xls";			
+		ExcelRead ER=new ExcelRead();	
+		AbstractString=ER.ExcelReadingGetColumn(DataToExtractFilePath, 1,1107, 8);
+		for(int i=0;i<AbstractString.size();i++){
+			String s =AbstractString.get(i);
+			System.out.println(s);
+			
+		}
+		System.out.println("--------------------------------------------------");
+		for(String s :AbstractString){
+
+			System.out.println(s);
+		}
 		
-		
-		CrfTestedDataBack aa=new CrfTestedDataBack();
-		System.out.println("1");
-		aa.CrfTDB("D:\\file\\4", "D:\\file\\5");
-		System.out.println("2");
 	}
 	
 	public static void ffk() {
@@ -43,7 +52,7 @@ public class test12 {
 		for (int i=0; i < AbstractString.size(); i++) {
 			
 			Abs.add(cfk(AbstractString.get(i)));
-			
+		
 		}	
 		
 		ExcelWrite EW=new ExcelWrite();
