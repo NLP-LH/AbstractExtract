@@ -3,6 +3,8 @@ import libsvm.*;
 import java.io.*;
 import java.util.*;
 
+import resource.FilePath;
+
 public class  svm_train {
 	private svm_parameter param;		// set by parse_command_line
 	private svm_problem prob;		     // set by read_problem
@@ -110,7 +112,7 @@ public class  svm_train {
 		{
 			model = svm.svm_train(prob,param);
 			//svm.svm_save_model(model_file_name,model);
-			svm.svm_save_model("D:/file/SVMFile/SVMModel",model);
+			svm.svm_save_model(FilePath.SVMModel,model);
 		
 		}
 	}

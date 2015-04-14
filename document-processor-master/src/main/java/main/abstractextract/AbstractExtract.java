@@ -9,6 +9,7 @@ import main.abstractextract.sentenceextract.TypeExtract;
 import crf.datawash.CrfDataWash;
 import crf.datawash.CrfTestedDataBack;
 import crf.term.recognition.CrfCmdControl;
+import resource.FilePath;
 import svm.ClassificationTree;
 import svm.datawash.AllTermsReplaceByShuYu;
 import svm.datawash.SVMedAbstractBack;
@@ -20,7 +21,7 @@ public class AbstractExtract {
 
 	
 	public static void main(String[] args) throws IOException {
-		String DataToExtractFilePath="D:/file/DataToExtract/FullData.xls";
+		String DataToExtractFilePath=FilePath.DataToExtractFilePath;
 		int StartRow=1;
 		int EndRow=1107;
 		ArrayList<String> AbstractString = new ArrayList<String>();				
@@ -30,8 +31,7 @@ public class AbstractExtract {
 		AbstractString=ER.ExcelReadingGetColumn(DataToExtractFilePath, StartRow,EndRow, 8);		
 	    //将读取的摘要转换成CRF要求的格式，并写入CRF文件夹的TXT文件中
 		CrfDataWash CDW=new CrfDataWash();
-		FileInputAndOutput.writetxtFile(CDW.CrfDWOfList(AbstractString),"D:/file/Crf/CrfDataToTest.txt");//写入文件中
-		
+		FileInputAndOutput.writetxtFile(CDW.CrfDWOfList(AbstractString),FilePath.CrfDataToTest);//写入文件中	
     	//用CRF进行训练
 		CrfCmdControl CCC=new CrfCmdControl();
 		CCC.CrfControl("crf_test -m CrfModel CrfDataToTest.txt >> result");
@@ -43,10 +43,10 @@ public class AbstractExtract {
         }
 		//再将训练完的数据转换成用####()####标注的文本
 		CrfTestedDataBack CTDB=new CrfTestedDataBack();
-		CTDB.CrfTDB("D:/file/Crf/result","D:/file/Crf/resultAfterCTDB");
+		CTDB.CrfTDB(FilePath.result,FilePath.resultAfterCTDB);
 		//将转换完的文本放入EXCEL表格中，
 		ArrayList<String> AbstractCTBD = new ArrayList<String>();
-		AbstractCTBD=FileInputAndOutput.readTxtFile2("D:/file/Crf/resultAfterCTDB");
+		AbstractCTBD=FileInputAndOutput.readTxtFile2(FilePath.resultAfterCTDB);
 		EW.ExcelWritingOfColumn(DataToExtractFilePath, StartRow,EndRow, 10, AbstractCTBD);
 		//将标出来的术语转换成术语两字
 		AllTermsReplaceByShuYu ATR=new AllTermsReplaceByShuYu();
@@ -57,9 +57,9 @@ public class AbstractExtract {
 		ArrayList<String> AbstractString3 = new ArrayList<String>();
 		AbstractString2=ER.ExcelReadingGetColumn(DataToExtractFilePath, StartRow,EndRow, 11);
 		ClassificationTree CT=new ClassificationTree();
-		for(int i =0;i<AbstractString2.size();i++)
+		for(String s:AbstractString2)
 		{
-			AbstractString3.add(CT.Classification(AbstractString2.get(i)));			
+			AbstractString3.add(CT.Classification(s));			
 		}
 		EW.ExcelWritingOfColumn(DataToExtractFilePath, StartRow,EndRow, 12, AbstractString3);
 		//将分类结合的结果中术语再替换成原有的字符串。
@@ -81,6 +81,6 @@ public class AbstractExtract {
 		//生成功效矩阵	
 		
 		
-		//还有需要完善的：1 CRF和SVM模型的训练，2 分类树中没有句号和本发明的句子
+		//还有需要完善的：1 CRF和SVM模型的训练，2 分类树中没有"句号"和"本发明"的句子
 	}
 }
