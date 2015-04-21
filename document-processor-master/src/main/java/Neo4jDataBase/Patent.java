@@ -10,7 +10,21 @@ public class Patent {
 	String PubDate;
 	String PatIllu;
 	String Abstract;
+	String Type;
+	String Effect;
 	
+	public String getType() {
+		return Type;
+	}
+	public void setType(String type) {
+		Type = type;
+	}
+	public String getEffect() {
+		return Effect;
+	}
+	public void setEffect(String effect) {
+		Effect = effect;
+	}
 	public String getName() {
 		return Name;
 	}
@@ -77,6 +91,8 @@ public class Patent {
 		", PubDate=" + PubDate + 
 		", PatIllu="+ PatIllu + 
 		",Abstract=" + Abstract +
+		",Type="+Type+
+		",Effect="+Effect+
 		"]";
 	}
 	

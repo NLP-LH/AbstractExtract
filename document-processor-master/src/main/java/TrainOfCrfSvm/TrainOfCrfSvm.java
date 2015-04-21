@@ -26,7 +26,7 @@ public class TrainOfCrfSvm {
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		 String TrianDataPath=FilePath.TrianDataPath;
+		String TrianDataPath=FilePath.TrianDataPath;
 		int StartRow=1;
 		int EndRow=1107;
 		//CRF训练
@@ -36,7 +36,6 @@ public class TrainOfCrfSvm {
 		AbstractCRFString=ER.ExcelReadingGetColumn(TrianDataPath, StartRow,EndRow, 1);
 		FileInputAndOutput.writetxtFile2(AbstractCRFString,FilePath.ManualLabeledabstract);//写入文件中
 		//将用####()####标注好的摘要语料转换成用BIO标注的文本	
-		System.out.println("ssss");
 		CrfDataWash CDW=new CrfDataWash();
 		CDW.CrfDW(FilePath.ManualLabeledabstract, FilePath.CrfAbstractToTrain);// 读取的文件路径和写入的文件路径
 		//将用BIO标注的文本进行训练，产生模型文件CrfModel
@@ -60,9 +59,8 @@ public class TrainOfCrfSvm {
 		Sorting.sort(FilePath.Train, FilePath.SortedTrain);//参数为待排序的文件和排完生成的文件
 		//将已经处理好的数据放入SVM中进行训练，产生MODEL文件，在程序的根目录下
 		String[] trainArgs = {FilePath.SortedTrain};//directory of training file
-		String modelFile = svm_train.main(trainArgs);//model文件的生成路径在SVM_TRAIN中修改
-		
-	
+		svm_train.main(trainArgs);//model文件的生成路径在SVM_TRAIN中修改
+			
 	}
 
 }

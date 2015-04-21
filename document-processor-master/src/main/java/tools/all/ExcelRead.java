@@ -70,6 +70,8 @@ public class ExcelRead {
 				patent.setPubDate(sheet.getCell(6,p).getContents());
 				patent.setPatIllu(sheet.getCell(7, p).getContents());
 				patent.setAbstract(sheet.getCell(8, p).getContents());
+				patent.setType(sheet.getCell(14, p).getContents());
+				patent.setEffect(sheet.getCell(15, p).getContents());
 				Pat.add(patent);
 				
 			}

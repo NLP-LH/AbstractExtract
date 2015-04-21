@@ -18,8 +18,8 @@ public class LibSVMTest {
 		//System.out.println(modelFile);
 		
 		String[] testArgs = {"D:/file/SVMFile/SortedTest.txt", "D:/file/SVMFile/SVMModel", "result"};//directory of test file, model file, result file
-		
-		Double accuracy = svm_predict.main(testArgs);
+		svm_predict.main(testArgs);
+		//Double accuracy = svm_predict.main(testArgs);
 		//System.out.println("SVM Classification is done! The accuracy is " + accuracy);
 		
 		//Test for cross validation

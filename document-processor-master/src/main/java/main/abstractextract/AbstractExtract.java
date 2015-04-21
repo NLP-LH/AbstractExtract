@@ -22,6 +22,7 @@ public class AbstractExtract {
 	
 	public static void main(String[] args) throws IOException {
 		String DataToExtractFilePath=FilePath.DataToExtractFilePath;
+		//数据在EXCEL中的起始行和结束行，从0行是标题
 		int StartRow=1;
 		int EndRow=1107;
 		ArrayList<String> AbstractString = new ArrayList<String>();				
@@ -70,7 +71,7 @@ public class AbstractExtract {
 		Abs13=ER.ExcelReadingGetColumn(DataToExtractFilePath, StartRow,EndRow, 13);
 		TypeExtract TE=new TypeExtract();
 		EW.ExcelWritingOfColumn(DataToExtractFilePath, StartRow,EndRow, 14,TE.distinguish(Abs13));						
-		//对功效进行提取		（还要再修改，可以按标点符号进行分句再抽取）
+		//对功效进行提取		
 		EffectExtract EE=new EffectExtract();
 		EW.ExcelWritingOfColumn(DataToExtractFilePath, StartRow,EndRow, 15,EE.ExE(Abs13));
 		//对组件进行提取
@@ -82,5 +83,7 @@ public class AbstractExtract {
 		
 		
 		//还有需要完善的：1 CRF和SVM模型的训练，2 分类树中没有"句号"和"本发明"的句子
+		
+		
 	}
 }

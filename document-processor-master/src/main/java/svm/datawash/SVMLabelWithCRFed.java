@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import tools.all.ExcelRead;
 import tools.all.ExcelWrite;
-import tools.all.FileInputAndOutput;
 
 public class SVMLabelWithCRFed {
 	//把CRF和SVM的手工标注结果相结合
